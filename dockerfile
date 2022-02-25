@@ -46,4 +46,4 @@ RUN apk add --no-cache git python3 && \
     rm -r /var/cache/apk && \
     rm -r /usr/share/man
 
-ENTRYPOINT ["/app/test.sh"]
+ENTRYPOINT ["entrypoint.sh"]
