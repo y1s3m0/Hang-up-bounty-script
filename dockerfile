@@ -36,6 +36,7 @@ RUN apk update -f \
     git clone ${REPO_URL}/y1s3m0/Hang-up-bounty-script --depth=1 /app && \
     chmod 777 /app/start.sh && \
     chmod 777 /app/entrypoint.sh && \
+    cp -f /app/entrypoint.sh /usr/local/bin/entrypoint.sh && \
     mkdir /app/new/ && \
     mkdir /app/new/tmp && \
     wget ${REPO_URL}/projectdiscovery/subfinder/releases/download/v2.4.9/subfinder_2.4.9_linux_amd64.zip && \

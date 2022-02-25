@@ -1,4 +1,5 @@
 #!/bin/bash
+cd /app
 export PATH=$PATH:`pwd`
 
 while true
