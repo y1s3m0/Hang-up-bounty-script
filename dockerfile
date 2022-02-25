@@ -54,4 +54,4 @@ RUN apk update -f \
     rm -r /var/cache/apk && \
     rm -r /usr/share/man
 
-CMD ["start.sh"]
+CMD ["/app/start.sh"]

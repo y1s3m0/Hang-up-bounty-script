@@ -6,6 +6,8 @@ while true
 do
 echo '['`date +%Y-%m-%d-%H:%M:%S`']：开始脚本'
 
+git pull;
+
 python3 getjson.py;#下载zip
 
 for zipf in `ls ./new/*.zip`
