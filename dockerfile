@@ -26,6 +26,8 @@ ENV REPO_URL='https://github.com/' \
 #sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
 WORKDIR /app
 
+VOLUME ["/app"]
+
 RUN apk update -f \
     && apk upgrade \
     && apk add --no-cache git bash wget curl \
@@ -34,6 +36,7 @@ RUN apk update -f \
     git clone ${REPO_URL}/y1s3m0/Hang-up-bounty-script --depth=1 /app && \
     chmod 777 /app/start.sh && \
     chmod 777 /app/entrypoint.sh && \
+    chmod 777 /app/anew && \
     mkdir /app/new/ && \
     mkdir /app/new/tmp && \
     wget ${REPO_URL}/projectdiscovery/subfinder/releases/download/v2.4.9/subfinder_2.4.9_linux_amd64.zip && \
@@ -48,7 +51,8 @@ RUN apk update -f \
     unzip -o nuclei_2.6.2_linux_amd64.zip && \
     rm nuclei_2.6.2_linux_amd64.zip && \
     chmod 777 /app/nuclei && \
+    pip install requests && \
     rm -r /var/cache/apk && \
     rm -r /usr/share/man
 
-CMD ["entrypoint.sh"]
+CMD ["start.sh"]
