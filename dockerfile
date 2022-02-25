@@ -28,7 +28,7 @@ WORKDIR /app
 
 RUN apk update -f \
     && apk upgrade \
-    && apk add --no-cache git  \
+    && apk add --no-cache git bash wget curl \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone &&\
     git clone ${REPO_URL}/y1s3m0/Hang-up-bounty-script --depth=1 /app && \
