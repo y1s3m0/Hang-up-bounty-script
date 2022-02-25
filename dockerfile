@@ -18,7 +18,7 @@ ENV REPO_URL='https://github.com/' \
     OK="${Green}[OK]${Font}" \
     Error="${Red}[错误]${Font}"
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+#RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 #RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 
 WORKDIR /app
@@ -29,6 +29,7 @@ RUN apk add --no-cache git python3 && \
     git clone ${REPO_URL}/y1s3m0/Hang-up-bounty-script --depth=1 /app && \
     chmod 777 /app/start.sh && \
     chmod 777 /app/test.sh && \
+    mkdir /app/new/ && \
     mkdir /app/new/tmp && \
     wget ${REPO_URL}/projectdiscovery/subfinder/releases/download/v2.4.9/subfinder_2.4.9_linux_amd64.zip && \
     unzip subfinder_2.4.9_linux_amd64.zip && \
