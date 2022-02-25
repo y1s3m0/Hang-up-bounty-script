@@ -34,15 +34,15 @@ RUN apk add --no-cache git python3 && \
     wget ${REPO_URL}/projectdiscovery/subfinder/releases/download/v2.4.9/subfinder_2.4.9_linux_amd64.zip && \
     unzip subfinder_2.4.9_linux_amd64.zip && \
     rm subfinder_2.4.9_linux_amd64.zip && \
-    chmod chmod 777 /app/subfinder && \
+    chmod 777 /app/subfinder && \
     wget ${REPO_URL}/projectdiscovery/httpx/releases/download/v1.1.5/httpx_1.1.5_linux_amd64.zip && \
     unzip httpx_1.1.5_linux_amd64.zip && \
     rm httpx_1.1.5_linux_amd64.zip && \
-    chmod chmod 777 /app/httpx && \
+    chmod 777 /app/httpx && \
     wget ${REPO_URL}/projectdiscovery/nuclei/releases/download/v2.6.2/nuclei_2.6.2_linux_amd64.zip && \
     unzip nuclei_2.6.2_linux_amd64.zip && \
     rm nuclei_2.6.2_linux_amd64.zip && \
-    chmod chmod 777 /app/nuclei && \
+    chmod 777 /app/nuclei && \
     rm -r /var/cache/apk && \
     rm -r /usr/share/man
 
