@@ -1,4 +1,4 @@
-.vscode/
-new/
-*.json
-pushplus.py
+.vscode/**
+new/**
+*.txt
+*.log

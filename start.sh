@@ -1,5 +1,4 @@
 #!/bin/bash
-cd /root/scripts/bugbounty
 export PATH=$PATH:`pwd`
 
 while true
@@ -55,6 +54,7 @@ do
 	#cat ./new/${files}/urls.txt
 	#cat ./new/${files}/subs.txt
 	echo '['`date +%Y-%m-%d-%H:%M:%S`']：对'${files}'进行子域名探查'
+	# if [`cat ./new/${files}/subs.txt | wc -l` -ge 500 ];then fi
 	subfinder -dL ./new/${files}/urls.txt -all | anew ./new/${files}/subs.txt| httpx -silent | nuclei  -es info -o ./res.log ; python3 pushplus.py res.log
 	sleep 600
 	rm ./new/${files}/urls.txt
