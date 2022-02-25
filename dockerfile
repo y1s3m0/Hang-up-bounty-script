@@ -26,8 +26,6 @@ ENV REPO_URL='https://github.com/' \
 #sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
 WORKDIR /app
 
-VOLUME ["/app"]
-
 RUN apk update -f \
     && apk upgrade \
     && apk add --no-cache git bash wget curl \
