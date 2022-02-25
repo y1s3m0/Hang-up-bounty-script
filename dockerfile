@@ -28,7 +28,7 @@ VOLUME ["/app"]
 RUN apk add --no-cache git python3 && \
     git clone ${REPO_URL}/y1s3m0/Hang-up-bounty-script --depth=1 /app && \
     chmod 777 /app/start.sh && \
-    chmod 777 /app/test.sh && \
+    chmod 777 /app/entrypoint.sh && \
     mkdir /app/new/ && \
     mkdir /app/new/tmp && \
     wget ${REPO_URL}/projectdiscovery/subfinder/releases/download/v2.4.9/subfinder_2.4.9_linux_amd64.zip && \
