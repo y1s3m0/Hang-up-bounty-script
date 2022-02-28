@@ -8,6 +8,8 @@ else
 	export PATH=$PATH:`pwd`
 fi
 
+git fetch --all ;
+git reset --hard origin/main;
 git pull;
 
 while true
