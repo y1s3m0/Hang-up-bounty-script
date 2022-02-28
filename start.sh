@@ -75,8 +75,8 @@ do
 		# if [`cat ./new/${files}/subs.txt | wc -l` -ge 500 ];then fi
 		subfinder -dL ./new/${files}/urls.txt -all | anew ./new/${files}/subs.txt| httpx -silent | nuclei  -es info -o ./res.log ; python3 pushplus.py res.log
 		sleep 120
-		echo '' > ./new/${files}/urls.txt
-		echo '' > ./new/${files}/subs.txt
+		echo '`date +%Y-%m-%d-%H:%M:%S`' > ./new/${files}/urls.txt
+		echo '`date +%Y-%m-%d-%H:%M:%S`' > ./new/${files}/subs.txt
 	fi
 	else
 	#echo "文件不存在或者您输入的路径有误"
