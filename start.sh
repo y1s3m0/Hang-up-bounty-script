@@ -41,7 +41,7 @@ do
 done	
 
 echo '['`date +%Y-%m-%d-%H:%M:%S`']：zip更新完毕'
-echo '['`date +%Y-%m-%d-%H:%M:%S`']：subs更新内容：`cat subs.txt`'
+echo '['`date +%Y-%m-%d-%H:%M:%S`']：subs更新内容：'`cat subs.txt`
 
 #sort urls.txt |uniq > urls.txt;
 
