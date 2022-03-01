@@ -51,7 +51,7 @@ echo '['`date +%Y-%m-%d-%H:%M:%S`']：subs更新内容：'`cat subs.txt`
 
 #subfinder -dL urls.txt -all | anew subs.txt 
 echo '['`date +%Y-%m-%d-%H:%M:%S`']：对更新子域名进行探查'
-cat subs.txt| httpx -silent | nuclei  -es info -o ./res.log ; python3 pushplus.py res.log;
+cat subs.txt| httpx -silent | nuclei -resume -es info -o ./res.log ; python3 pushplus.py res.log;
 
 echo '['`date +%Y-%m-%d-%H:%M:%S`']：对各域名进行子域名探查'
 
@@ -91,7 +91,7 @@ do
 		#cat ./new/${files}/subs.txt
 		echo '['`date +%Y-%m-%d-%H:%M:%S`']：未进行探查过，对'${files}'进行子域名探查'
 		# if [`cat ./new/${files}/subs.txt | wc -l` -ge 500 ];then fi
-		subfinder -dL ./new/${files}/urls.txt -all | anew ./new/${files}/subs.txt| httpx -silent | nuclei  -es info -o ./res.log ; python3 pushplus.py res.log
+		subfinder -dL ./new/${files}/urls.txt -all | anew ./new/${files}/subs.txt| httpx -silent | nuclei -resume -es info -o ./res.log ; python3 pushplus.py res.log
 		sleep 120
 		echo '' > ./new/${files}/urls.txt
 		echo '' > ./new/${files}/subs.txt
