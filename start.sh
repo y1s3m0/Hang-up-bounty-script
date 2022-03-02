@@ -12,6 +12,8 @@ git fetch --all ;
 git reset --hard origin/main;
 git pull;
 
+chmod +x ./anew;
+
 while true
 do
 echo '['`date +%Y-%m-%d-%H:%M:%S`']：开始脚本'
@@ -55,12 +57,12 @@ cat subs.txt| httpx -silent | nuclei -resume -es info -o ./res.log ; python3 pus
 
 echo '['`date +%Y-%m-%d-%H:%M:%S`']：对各域名进行子域名探查'
 
-for files in `ls ./new/`
+for files in `ls -F ./new/| grep '/$'`
 do
-	if [ -f ./new/${files}/urls.txt ];
+	if [ -f ./new/${files}urls.txt ];
 	then
 	#echo "文件存在！路径为：$filepath"
-	filetimestamp=`stat -c %Y ./new/${files}/urls.txt`
+	filetimestamp=`stat -c %Y ./new/${files}urls.txt`
 	#echo "文件最后修改时间戳：$filetimestamp"
 	timecha=$[`date +%s` - $filetimestamp]
 	
@@ -68,33 +70,33 @@ do
 	#echo '当前时间大于文件最后修改时间5天'
 		for line in `ls ./new/${files}`cx
 		do
-		echo ${line}|sed 's/\.txt//g' >> ./new/${files}/urls.txt
-		cat ./new/${files}/${line} >> ./new/${files}/subs.txt
+		echo ${line}|sed 's/\.txt//g' >> ./new/${files}urls.txt
+		cat ./new/${files}${line} >> ./new/${files}subs.txt
 		done
-		#cat ./new/${files}/urls.txt
-		#cat ./new/${files}/subs.txt
+		#cat ./new/${files}urls.txt
+		#cat ./new/${files}subs.txt
 		echo '['`date +%Y-%m-%d-%H:%M:%S`']：距上次大于5天，对'${files}'进行子域名探查'
-		# if [`cat ./new/${files}/subs.txt | wc -l` -ge 500 ];then fi
-		subfinder -dL ./new/${files}/urls.txt -all | anew ./new/${files}/subs.txt| httpx -silent | nuclei  -es info -o ./res.log ; python3 pushplus.py res.log
+		# if [`cat ./new/${files}subs.txt | wc -l` -ge 500 ];then fi
+		subfinder -dL ./new/${files}urls.txt -all | anew ./new/${files}subs.txt| httpx -silent | nuclei  -es info -o ./res.log ; python3 pushplus.py res.log
 		sleep 120
-		echo '`date +%Y-%m-%d-%H:%M:%S`' > ./new/${files}/urls.txt
-		echo '`date +%Y-%m-%d-%H:%M:%S`' > ./new/${files}/subs.txt
+		echo '`date +%Y-%m-%d-%H:%M:%S`' > ./new/${files}urls.txt
+		echo '`date +%Y-%m-%d-%H:%M:%S`' > ./new/${files}subs.txt
 	fi
 	else
 	#echo "文件不存在或者您输入的路径有误"
 		for line in `ls ./new/${files}`
 		do
-		echo ${line}|sed 's/\.txt//g' >> ./new/${files}/urls.txt
-		cat ./new/${files}/${line} >> ./new/${files}/subs.txt
+		echo ${line}|sed 's/\.txt//g' >> ./new/${files}urls.txt
+		cat ./new/${files}${line} >> ./new/${files}subs.txt
 		done
-		#cat ./new/${files}/urls.txt
-		#cat ./new/${files}/subs.txt
+		#cat ./new/${files}urls.txt
+		#cat ./new/${files}subs.txt
 		echo '['`date +%Y-%m-%d-%H:%M:%S`']：未进行探查过，对'${files}'进行子域名探查'
-		# if [`cat ./new/${files}/subs.txt | wc -l` -ge 500 ];then fi
-		subfinder -dL ./new/${files}/urls.txt -all | anew ./new/${files}/subs.txt| httpx -silent | nuclei -resume -es info -o ./res.log ; python3 pushplus.py res.log
+		# if [`cat ./new/${files}subs.txt | wc -l` -ge 500 ];then fi
+		subfinder -dL ./new/${files}urls.txt -all | anew ./new/${files}subs.txt| httpx -silent | nuclei -resume -es info -o ./res.log ; python3 pushplus.py res.log
 		sleep 120
-		echo '' > ./new/${files}/urls.txt
-		echo '' > ./new/${files}/subs.txt
+		echo '' > ./new/${files}urls.txt
+		echo '' > ./new/${files}subs.txt
 	fi
 
 done
