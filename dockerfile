@@ -32,6 +32,7 @@ RUN apk update -f \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone &&\
     git clone ${REPO_URL}/y1s3m0/Hang-up-bounty-script --depth=1 /app && \
+    chmod 777 /app/gitpull.sh && \
     chmod 777 /app/start.sh && \
     chmod 777 /app/anew && \
     mkdir /app/new/ && \
@@ -52,4 +53,4 @@ RUN apk update -f \
     rm -r /var/cache/apk && \
     rm -r /usr/share/man
 
-CMD ["/app/start.sh"]
+CMD ["/app/gitpull.sh"]
