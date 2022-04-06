@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -f ./nuclei ];then
+if [ ! -f ./nuclei ];then
 wget ${REPO_URL}/tomnomnom/anew/releases/download/v0.1.1/anew-linux-amd64-0.1.1.tgz && \
 tar zxvf anew-linux-amd64-0.1.1.tgz && \
 rm anew-linux-amd64-0.1.1.tgz && \
