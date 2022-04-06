@@ -6,7 +6,7 @@ import sys,os
  #https://dns.projectdiscovery.io/dns/stats
  #https://chaos-data.projectdiscovery.io/index.json
  #https://dns.projectdiscovery.io/dns/clickup.com
-#没有文件夹就下载，有就对比change<50的就下载
+#没有文件夹就下载，有就对比change!=0的就下载
 
 new_json = requests.get('https://chaos-data.projectdiscovery.io/index.json',timeout=50)
 new_data = new_json.json()
@@ -14,6 +14,7 @@ new_data = new_json.json()
 
 filename = './new/index.json'
 if not os.path.exists(filename):
+    print("找不到index文件，进行覆盖")
     with open(filename, 'wb') as f:
         f.write(new_json.content)
     sys.exit()
@@ -41,12 +42,13 @@ for new_dict in new_data:
         if new_dict['change']!=0:
             for local_dict in local_data:
                 if local_dict['name']==new_dict['name']:
-                    if local_dict['last_updated'].split('.')[-1]!=new_dict['last_updated'].split('.')[-1]:
+                    if local_dict['last_updated']!=new_dict['last_updated']:
                         print('update zip')
                         updateSubs(new_dict)
                     break
 
 with open(filename, 'wb') as f:
+    print("下载完成，进行覆盖")
     f.write(new_json.content)
-sys.exit()
+
 
