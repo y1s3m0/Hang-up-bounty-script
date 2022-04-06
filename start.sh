@@ -29,7 +29,7 @@ do
 	do
 		name=$(echo "${zipf}"|sed 's/\.zip//g'|sed 's/\.\/new\///g')
 		if [ -e ./new/${name} ];then
-			echo "[`date +%Y-%m-%d\ %H:%M:%S`]：src平台${name}更新"
+			echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：src平台${name}更新"
 			mkdir ./new/tmp/${name}/;
 			unzip ${zipf} -d ./new/tmp/${name}/
 			for line in `ls ./new/tmp/${name}/*.txt`
@@ -37,29 +37,29 @@ do
 					txt_name=$(echo "${line}"|sed 's/\.txt//g'|cut -f 5 -d '/')
 					cat $line | anew ./new/${name}/${txt_name}.txt >> ./new/${name}/subs.txt
 					echo $txt_name >> ./new/${name}/urls.txt
-					echo "[`date +%Y-%m-%d\ %H:%M:%S`]：域名${txt_name}更新"
+					echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：域名${txt_name}更新"
 			done
 			rm -rf ./new/tmp/${name}/
 		else
-			echo "[`date +%Y-%m-%d\ %H:%M:%S`]：src平台${name}重建"
+			echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：src平台${name}重建"
 			unzip ${zipf} -d ./new/${name}/
 		fi
 		rm ${zipf}
 
-		echo "[`date +%Y-%m-%d\ %H:%M:%S`]：：对${name}chaos源进行探查`wc -l ./new/${name}/subs.txt``wc -l ./new/${name}/urls.txt`"
+		echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：：对${name}chaos源进行探查$(wc -l ./new/${name}/subs.txt)$(wc -l ./new/${name}/urls.txt)"
 		
 		cat ./new/${name}/subs.txt| httpx -silent | nuclei -resume -es info,low -o ./new/${name}/res_chaos.log; python3 pushplus.py ./new/${name}/res_chaos.log;
 		
-		echo "[`date +%Y-%m-%d\ %H:%M:%S`]：对${name}subfinder源进行探查"
+		echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：对${name}subfinder源进行探查"
 
 		subfinder -dL ./new/${name}/urls.txt -all | anew ./new/${name}/subs.txt | httpx -silent | nuclei -resume -es info,low -o ./new/${name}/res_sub.log; python3 pushplus.py ./new/${name}/res_sub.log;
 		
 		echo '' > ./new/${name}/subs.txt
 		echo '' > ./new/${name}/urls.txt
 	done	
-	echo "[`date +%Y-%m-%d\ %H:%M:%S`]：结束脚本"
+	echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：结束脚本"
 
-	while [ $(expr $(date +%s) - $(date +%s -d ${start_time})) -lt 21600  ]
+	while [ "$(expr $(date +%s) - $(date +%s -d ${start_time}))" -lt 21600  ]
 	do
 		sleep 600s
 	done
