@@ -24,6 +24,7 @@ RUN apk update -f \
     && echo "Asia/Shanghai" > /etc/timezone && \
     git clone ${REPO_URL}/y1s3m0/Hang-up-bounty-script --depth=1 /app && \
     pip install requests && \
+    chmod 777 ./* && \
     rm -r /var/cache/apk && \
     rm -r /usr/share/man
 
