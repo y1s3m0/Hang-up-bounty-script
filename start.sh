@@ -59,7 +59,7 @@ do
 	done	
 	echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：结束脚本"
 
-	while [ "$(expr $(date +%s) - $(date +%s -d ${start_time}))" -lt 21600  ]
+	while [ $((($(date +%s) - $(date +%s -d "${start_time}"))/60)) -lt 3600  ]
 	do
 		sleep 600s
 	done
