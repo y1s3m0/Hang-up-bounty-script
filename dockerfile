@@ -22,6 +22,7 @@ RUN apk update -f \
     && apk add --no-cache git bash wget curl \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone && \
+    git clone ${REPO_URL}/y1s3m0/Hang-up-bounty-script --depth=1 /app && \
     pip install requests && \
     rm -r /var/cache/apk && \
     rm -r /usr/share/man
