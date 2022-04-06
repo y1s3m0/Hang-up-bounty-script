@@ -21,9 +21,8 @@ do
 
 	echo "[${start_time}]：开始脚本"
 
-	
-
 	python3 getjson.py;#下载zip
+	echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：下载zip"
 
 	for zipf in `ls ./new/*.zip`
 	do
@@ -63,7 +62,6 @@ do
 	do
 		sleep 600s
 	done
-	sleep 600s
 done
 
 # `wc -l subs.txt`
