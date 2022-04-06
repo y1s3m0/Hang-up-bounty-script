@@ -62,6 +62,7 @@ do
 	do
 		sleep 600s
 	done
+	sleep 600s
 done
 
 # `wc -l subs.txt`
