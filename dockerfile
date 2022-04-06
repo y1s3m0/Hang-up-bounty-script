@@ -7,6 +7,7 @@ LABEL AUTHOR = "ysmco <none>"
 ENV REPO_URL='https://github.com/' \
     PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/app  \
     LANG=zh_CN.UTF-8 \
+    SHELL=/bin/bash \
     PLUS_TOKEN='' \
 
 #RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
@@ -20,8 +21,7 @@ RUN apk update -f \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone &&\
     git clone ${REPO_URL}/y1s3m0/Hang-up-bounty-script --depth=1 /app && \
-    # mkdir /app/new/ && \
-    # mkdir /app/new/tmp && \
+    mkdir /app/new/ && \
     wget ${REPO_URL}/tomnomnom/anew/releases/download/v0.1.1/anew-linux-amd64-0.1.1.tgz && \
     tar zxvf anew-linux-amd64-0.1.1.tgz && \
     rm anew-linux-amd64-0.1.1.tgz && \
