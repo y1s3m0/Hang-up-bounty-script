@@ -11,11 +11,12 @@ unzip -o httpx_1.2.0_linux_amd64.zip && \
 rm httpx_1.2.0_linux_amd64.zip && \
 wget ${REPO_URL}/projectdiscovery/nuclei/releases/download/v2.6.5/nuclei_2.6.5_linux_amd64.zip && \
 unzip -o nuclei_2.6.5_linux_amd64.zip && \
-rm nuclei_2.6.5_linux_amd64.zip
+rm nuclei_2.6.5_linux_amd64.zip && \
+chmod +x ./*
 
 while true
 do
-	start_time=$(date +%Y-%m-%d %H:%M:%S)
+	start_time=$(date +%Y-%m-%d\ %H:%M:%S)
 
 	echo "[${start_time}]：开始脚本"
 
@@ -57,7 +58,7 @@ do
 	done	
 	echo "[`date +%Y-%m-%d\ %H:%M:%S`]：结束脚本"
 
-	while [ $((($(date +%s) - $(date +%s -d ${start_time}))/60)) -lt 360 ]
+	while [ $(($(date +%s) - $(date +%s -d ${start_time}))) -lt 21600 ]
 	do
 		sleep 600s
 	done
