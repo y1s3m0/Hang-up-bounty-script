@@ -8,7 +8,7 @@ ENV REPO_URL='https://github.com/' \
     PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/app  \
     LANG=zh_CN.UTF-8 \
     SHELL=/bin/bash \
-    PLUS_TOKEN='' \
+    PLUS_TOKEN=''
 
 #RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 #RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
