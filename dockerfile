@@ -1,8 +1,8 @@
 FROM python:3.6.13-alpine
 # FROM ubuntu:trusty
 
-# MAINTAINER ysmco <none>
-LABEL AUTHOR = "ysmco <none>"
+MAINTAINER ysmco
+
 
 ENV REPO_URL='https://github.com/' \
     PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/app  \
@@ -14,6 +14,8 @@ ENV REPO_URL='https://github.com/' \
 #RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 #sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
 WORKDIR /app
+
+#VOLUME ["/app"]
 
 RUN apk update -f \
     && apk upgrade \
