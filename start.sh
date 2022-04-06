@@ -1,5 +1,5 @@
 #!/bin/bash
-
+if [ -f ./nuclei ];then
 wget ${REPO_URL}/tomnomnom/anew/releases/download/v0.1.1/anew-linux-amd64-0.1.1.tgz && \
 tar zxvf anew-linux-amd64-0.1.1.tgz && \
 rm anew-linux-amd64-0.1.1.tgz && \
@@ -13,6 +13,7 @@ wget ${REPO_URL}/projectdiscovery/nuclei/releases/download/v2.6.5/nuclei_2.6.5_l
 unzip -o nuclei_2.6.5_linux_amd64.zip && \
 rm nuclei_2.6.5_linux_amd64.zip && \
 chmod +x ./*
+fi
 
 while true
 do
@@ -58,7 +59,7 @@ do
 	done	
 	echo "[`date +%Y-%m-%d\ %H:%M:%S`]：结束脚本"
 
-	while [ `expr $(date +%s) - $(date +%s -d ${start_time})` -lt 21600  ]
+	while [ $(expr $(date +%s) - $(date +%s -d ${start_time})) -lt 21600  ]
 	do
 		sleep 600s
 	done
