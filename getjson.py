@@ -6,7 +6,7 @@ import sys,os
  #https://dns.projectdiscovery.io/dns/stats
  #https://chaos-data.projectdiscovery.io/index.json
  #https://dns.projectdiscovery.io/dns/clickup.com
-#没有文件夹就下载，有就对比change<50的就下载
+#没有文件夹就下载，有就对比change!=0的就下载
 
 new_json = requests.get('https://chaos-data.projectdiscovery.io/index.json',timeout=50)
 new_data = new_json.json()
@@ -41,7 +41,7 @@ for new_dict in new_data:
         if new_dict['change']!=0:
             for local_dict in local_data:
                 if local_dict['name']==new_dict['name']:
-                    if local_dict['last_updated'].split('.')[-1]!=new_dict['last_updated'].split('.')[-1]:
+                    if local_dict['last_updated'].split('.')[0]!=new_dict['last_updated'].split('.')[0]:
                         print('update zip')
                         updateSubs(new_dict)
                     break

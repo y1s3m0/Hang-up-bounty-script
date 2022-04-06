@@ -16,6 +16,8 @@ with open(file) as f:
     f.seek(0)
     vuln = f.read()
 
+name=file.split('/')[-2]
+
 print(vuln)
 
 ran_str = ''.join(random.sample(string.ascii_letters + string.digits, 8))
@@ -23,14 +25,14 @@ title = "赏金漏洞提醒"
 content = """
 **您有新的赏金漏洞啦 ！**
 
-
+src:{}
 {}
 
 
 Token: {}
 
 **请注意查收哦 ~**
-""".format(str(vuln),ran_str)
+""".format(name,str(vuln),ran_str)
 
 url = 'http://www.pushplus.plus/send'
 data = {
