@@ -14,6 +14,7 @@ new_data = new_json.json()
 
 filename = './new/index.json'
 if not os.path.exists(filename):
+    print("找不到index文件，进行覆盖")
     with open(filename, 'wb') as f:
         f.write(new_json.content)
     sys.exit()
@@ -47,6 +48,7 @@ for new_dict in new_data:
                     break
 
 with open(filename, 'wb') as f:
+    print("下载完成，进行覆盖")
     f.write(new_json.content)
-sys.exit()
+
 
