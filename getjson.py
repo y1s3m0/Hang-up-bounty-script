@@ -42,7 +42,7 @@ for new_dict in new_data:
         if new_dict['change']!=0:
             for local_dict in local_data:
                 if local_dict['name']==new_dict['name']:
-                    if local_dict['last_updated'].split('.')[0]!=new_dict['last_updated'].split('.')[0]:
+                    if local_dict['last_updated']!=new_dict['last_updated']:
                         print('update zip')
                         updateSubs(new_dict)
                     break
