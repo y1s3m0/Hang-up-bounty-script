@@ -28,15 +28,16 @@ do
 	do
 		name=$(echo "${zipf}"|sed 's/\.zip//g'|sed 's/\.\/new\///g')
 		if [ -e ./new/${name} ];then
-			echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：src平台${name}更新"
+			echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：src项目${name}更新"
 			mkdir ./new/tmp/${name}/;
 			unzip ${zipf} -d ./new/tmp/${name}/
 			for line in `ls ./new/tmp/${name}/*.txt`
 			do
 					txt_name=$(echo "${line}"|sed 's/\.txt//g'|cut -f 5 -d '/')
 					cat $line | anew ./new/${name}/${txt_name}.txt >> ./new/${name}/subs.txt
+					cat $line >> ./new/${name}/subs_all.txt
 					echo $txt_name >> ./new/${name}/urls.txt
-					echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：域名${txt_name}更新"
+					#echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：域名${txt_name}更新"
 			done
 			rm -rf ./new/tmp/${name}/
 		else
@@ -45,22 +46,31 @@ do
 		fi
 		rm ${zipf}
 
-		echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：：对${name}_chaos源进行探查"
-		echo "$(wc -l ./new/${name}/subs.txt)"
-		echo "$(wc -l ./new/${name}/urls.txt)"
+	
+		echo "共更新子域名个数：$(wc -l ./new/${name}/subs.txt)"
+		echo "主域url个数：$(wc -l ./new/${name}/urls.txt)"
 		
-		if [ $(wc -l ./new/${name}/subs.txt||awk '{print $1}') -lt 500 ]; then
+		if [ $(wc -l ./new/${name}/subs.txt|awk '{print $1}') -lt 500 ]; then
+			echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：：对${name}_chaos源进行漏扫"
 			cat ./new/${name}/subs.txt| httpx -silent | nuclei -resume -es info,low -o ./new/${name}/res_chaos.log; python3 pushplus.py ./new/${name}/res_chaos.log;
+			echo '' > ./new/${name}/subs.txt
+			
+			subfinder -dL ./new/${name}/urls.txt -all | anew ./new/${name}/subs_all.txt >> ./new/${name}/subs_new.txt
+			echo "共扫描到新子域名个数：$(wc -l ./new/${name}/subs_new.txt)"
 		fi
-		#todo：增加subs个数判断
-		
-		
-		#echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：对${name}_subfinder源进行探查"
-		#todo：源探查和已有所有域名比较
-		#subfinder -dL ./new/${name}/urls.txt -all | anew ./new/${name}/subs.txt | httpx -silent | nuclei -resume -es info,low -o ./new/${name}/res_sub.log; python3 pushplus.py ./new/${name}/res_sub.log;
-		
-		echo '' > ./new/${name}/subs.txt
+
+		if [ $(wc -l ./new/${name}/subs_new.txt|awk '{print $1}') -lt 500 -a $(wc -l ./new/${name}/subs_new.txt|awk '{print $1}') -gt 1 ]; then
+			echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：对${name}_subfinder源进行漏扫"
+			cat ./new/${name}/subs_new.txt| httpx -silent | nuclei -resume -es info,low -o ./new/${name}/res_chaos.log; python3 pushplus.py ./new/${name}/res_chaos.log;
+			echo '' > ./new/${name}/subs_new.txt
+		fi
+
+		echo '' > ./new/${name}/subs_all.txt
 		echo '' > ./new/${name}/urls.txt
+
+		#
+	
+		
 	done	
 	echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：结束脚本"
 
