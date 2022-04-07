@@ -45,12 +45,12 @@ do
 		fi
 		rm ${zipf}
 
-		echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：：对${name}chaos源进行探查$(wc -l ./new/${name}/subs.txt)$(wc -l ./new/${name}/urls.txt)"
-		
+		echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：：对${name}_chaos源进行探查$(wc -l ./new/${name}/subs.txt)$(wc -l ./new/${name}/urls.txt)"
+		#todo：增加subs个数判断
 		cat ./new/${name}/subs.txt| httpx -silent | nuclei -resume -es info,low -o ./new/${name}/res_chaos.log; python3 pushplus.py ./new/${name}/res_chaos.log;
 		
-		#echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：对${name}subfinder源进行探查"
-
+		#echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：对${name}_subfinder源进行探查"
+		#todo：源探查和已有所有域名比较
 		#subfinder -dL ./new/${name}/urls.txt -all | anew ./new/${name}/subs.txt | httpx -silent | nuclei -resume -es info,low -o ./new/${name}/res_sub.log; python3 pushplus.py ./new/${name}/res_sub.log;
 		
 		echo '' > ./new/${name}/subs.txt
