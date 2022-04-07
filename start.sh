@@ -49,9 +49,9 @@ do
 		
 		cat ./new/${name}/subs.txt| httpx -silent | nuclei -resume -es info,low -o ./new/${name}/res_chaos.log; python3 pushplus.py ./new/${name}/res_chaos.log;
 		
-		echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：对${name}subfinder源进行探查"
+		#echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：对${name}subfinder源进行探查"
 
-		subfinder -dL ./new/${name}/urls.txt -all | anew ./new/${name}/subs.txt | httpx -silent | nuclei -resume -es info,low -o ./new/${name}/res_sub.log; python3 pushplus.py ./new/${name}/res_sub.log;
+		#subfinder -dL ./new/${name}/urls.txt -all | anew ./new/${name}/subs.txt | httpx -silent | nuclei -resume -es info,low -o ./new/${name}/res_sub.log; python3 pushplus.py ./new/${name}/res_sub.log;
 		
 		echo '' > ./new/${name}/subs.txt
 		echo '' > ./new/${name}/urls.txt
