@@ -14,7 +14,7 @@ new_data = new_json.json()
 
 filename = './new/index.json'
 if not os.path.exists(filename):
-    print("找不到index文件，进行覆盖")
+    print("py:找不到index文件，下载index")
     with open(filename, 'wb') as f:
         f.write(new_json.content)
     sys.exit()
@@ -36,19 +36,18 @@ path='./new/'
 for new_dict in new_data:
     if new_dict['bounty']:
         if not os.path.exists(path+new_dict['URL'].split('/')[-1][:-4]+'/'):
-            print('renew zip')
+            print('py:'+new_dict['name']+':新网站，下载zip')
             updateSubs(new_dict)
             continue
-        if new_dict['change']!=0:
-            for local_dict in local_data:
-                if local_dict['name']==new_dict['name']:
-                    if local_dict['last_updated']!=new_dict['last_updated']:
-                        print('update zip')
-                        updateSubs(new_dict)
-                    break
+        for local_dict in local_data:
+            if local_dict['name']==new_dict['name']:
+                if new_dict['change']!=0 or local_dict['count']!=new_dict['count']:
+                    print('py:'+local_dict['name']+'网站更新'+str(int(new_dict['count'])-int(local_dict['count']))+"个网址，下载zip")
+                    updateSubs(new_dict)
+                break
 
 with open(filename, 'wb') as f:
-    print("下载完成，进行覆盖")
+    print("py:下载完成，进行覆盖")
     f.write(new_json.content)
 
 
