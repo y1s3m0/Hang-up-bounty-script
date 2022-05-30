@@ -16,7 +16,7 @@ with open(file) as f:
     f.seek(0)
     vuln = f.read()
 
-name=os.popen('echo -n ${name}').read( )
+name=file.split('/')[-2]
 print(name)
 
 #print(vuln)
@@ -27,6 +27,7 @@ content = """
 **您有新的赏金漏洞啦 ！**
 
 src:{}
+
 {}
 
 

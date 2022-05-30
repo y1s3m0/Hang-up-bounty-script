@@ -27,7 +27,7 @@ do
 
 	for zipf in `ls ./new/*.zip`
 	do
-		name=$(echo "${zipf}"|sed 's/\.zip//g'|sed 's/\.\/new\///g')
+		export name=$(echo "${zipf}"|sed 's/\.zip//g'|sed 's/\.\/new\///g')
 		if [ -e ./new/${name} ];then
 			echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：src项目${name}更新"
 			mkdir ./new/tmp/${name}/;
