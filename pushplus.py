@@ -15,10 +15,11 @@ with open(file) as f:
         sys.exit()
     f.seek(0)
     vuln = f.read()
-
+print(file)
 name=file.split('/')[-2]
+print(name)
 
-print(vuln)
+#print(vuln)
 
 ran_str = ''.join(random.sample(string.ascii_letters + string.digits, 8))
 title = "赏金漏洞提醒"

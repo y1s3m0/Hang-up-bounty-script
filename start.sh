@@ -17,6 +17,7 @@ fi
 
 while true
 do
+	nuclei -update
 	start_time=$(date +%Y-%m-%d\ %H:%M:%S)
 
 	echo "[${start_time}]：开始脚本"
@@ -52,7 +53,8 @@ do
 		
 		if [ $(wc -l ./new/${name}/subs.txt|awk '{print $1}') -lt 500 ]; then
 			echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：：对${name}_chaos源进行漏扫"
-			cat ./new/${name}/subs.txt| httpx -silent | nuclei -resume -es info,low -o ./new/${name}/res_chaos.log; python3 pushplus.py ./new/${name}/res_chaos.log;
+			cat ./new/${name}/subs.txt| httpx -silent | nuclei -es info,low -o ./new/${name}/res_chaos.log;
+			python3 pushplus.py ./new/${name}/res_chaos.log;
 			echo '' > ./new/${name}/subs.txt
 			
 			subfinder -dL ./new/${name}/urls.txt -all | anew ./new/${name}/subs_all.txt >> ./new/${name}/subs_new.txt
@@ -61,7 +63,8 @@ do
 
 		if [ $(wc -l ./new/${name}/subs_new.txt|awk '{print $1}') -lt 500 -a $(wc -l ./new/${name}/subs_new.txt|awk '{print $1}') -gt 1 ]; then
 			echo "[$(date +%Y-%m-%d\ %H:%M:%S)]：对${name}_subfinder源进行漏扫"
-			cat ./new/${name}/subs_new.txt| httpx -silent | nuclei -resume -es info,low -o ./new/${name}/res_chaos.log; python3 pushplus.py ./new/${name}/res_chaos.log;
+			cat ./new/${name}/subs_new.txt| httpx -silent | nuclei -es info,low -o ./new/${name}/res_chaos.log;
+			python3 pushplus.py ./new/${name}/res_chaos.log ;
 			echo '' > ./new/${name}/subs_new.txt
 		fi
 
