@@ -17,7 +17,7 @@ with open(file) as f:
     vuln = f.read()
 
 name=file.split('/')[-2]
-print(name)
+#print(name)
 
 #print(vuln)
 
@@ -26,7 +26,7 @@ title = "赏金漏洞提醒"
 content = """
 **您有新的赏金漏洞啦 ！**
 
-src:{}
+【{}】:
 
 {}
 
