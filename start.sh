@@ -9,9 +9,9 @@ rm subfinder_2.5.1_linux_amd64.zip && \
 wget ${REPO_URL}/projectdiscovery/httpx/releases/download/v1.2.0/httpx_1.2.0_linux_amd64.zip && \
 unzip -o httpx_1.2.0_linux_amd64.zip && \
 rm httpx_1.2.0_linux_amd64.zip && \
-wget ${REPO_URL}/projectdiscovery/nuclei/releases/download/v2.6.5/nuclei_2.6.5_linux_amd64.zip && \
-unzip -o nuclei_2.6.5_linux_amd64.zip && \
-rm nuclei_2.6.5_linux_amd64.zip && \
+wget ${REPO_URL}/projectdiscovery/nuclei/releases/download/v2.7.1/nuclei_2.7.1_linux_amd64.zip && \
+unzip -o nuclei_2.7.1_linux_amd64.zip && \
+rm nuclei_2.7.1_linux_amd64.zip && \
 chmod +x ./*
 fi
 
