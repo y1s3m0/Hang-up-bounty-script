@@ -16,7 +16,7 @@ with open(file) as f:
     f.seek(0)
     vuln = f.read()
 
-name=os.popen('echo $name').read( )
+name=os.popen('echo -n ${name}').read( )
 print(name)
 
 #print(vuln)
