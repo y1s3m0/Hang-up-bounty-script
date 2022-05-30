@@ -15,8 +15,8 @@ with open(file) as f:
         sys.exit()
     f.seek(0)
     vuln = f.read()
-print(file)
-name=file.split('/')[-2]
+
+name=os.environ['name']
 print(name)
 
 #print(vuln)
