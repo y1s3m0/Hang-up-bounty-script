@@ -2,3 +2,5 @@
 new/**
 *.txt
 *.log
+*.json
+*.db
